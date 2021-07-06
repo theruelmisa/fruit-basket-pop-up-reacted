@@ -1,0 +1,173 @@
+.email-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.65);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.4s ease-in-out;
+	visibility: hidden;
+	opacity: 0;
+}
+
+.email-modal--visible {
+	visibility: visible;
+	opacity: 1;
+}
+
+.email-modal__close-btn {
+	cursor: pointer;
+	position: fixed;
+	top: 0;
+	right: 0;
+	padding: 2rem;
+}
+
+.email-modal .gg-close {
+	color: var(--white-text);
+}
+
+.gg-close {
+	--ggs: 2;
+}
+
+.email-modal__container {
+	background: var(--blackbg);
+	max-width: 70rem;
+	width: 100%;
+	color: var(--white-text);
+	display: flex;
+	position: relative;
+	overflow: hidden;
+}
+
+.email-modal__info {
+	width: 100%;
+	padding: 1.5rem;
+}
+
+.email-modal__info .logo {
+	margin-bottom: 4rem;
+}
+
+.email-modal h2 {
+	font-size: 2rem;
+	margin-bottom: 1.2rem;
+}
+
+.email-modal__message {
+	color: var(--dark-grey-text);
+	font-weight: 300%;
+	line-height: 1.8;
+	font-size: 1.4rem;
+	margin-bottom: 1.5rem;
+}
+
+.email-modal__highlight-text {
+	color: var(--light-grey-text);
+}
+
+.email-modal__error-msg {
+	color: var(--error);
+	margin-bottom: 0.5rem;
+	font-size: 1.2rem;
+	display: none;
+}
+
+.email-modal__error-msg--active {
+	display: block;
+}
+
+.email-modal__form-group {
+	background: var(--whitebg);
+	display: flex;
+	padding: 1rem;
+	margin-bottom: 1.5rem;
+}
+
+.email-modal__form-group--error {
+	border: 2px solid var(--error);
+}
+
+.email-modal__input {
+	background: inherit;
+	border: 0px solid;
+	width: 100%;
+	height: 3rem;
+}
+
+.email-modal__button {
+	cursor: pointer;
+	background: var(--green-text);
+	color: var(--white-text);
+	border: 0;
+	width: 15rem;
+}
+
+.email-modal__decline-offer {
+	cursor: pointer;
+	color: var(--dark-grey-text);
+	text-decoration: underline;
+	font-size: 1rem;
+	font-style: italic;
+	transition: all 0.3s ease-in-out;
+}
+
+.email-modal__decline-offer:hover {
+	color: var(--light-grey-text);
+}
+
+.email-modal__side-image img {
+	width: 30rem;
+	height: 100%;
+	object-fit: cover;
+}
+
+.email-thank {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: var(--whitebg);
+	color: var(--black-text);
+	transform: translate3d(100%, 0, 0);
+	transition: all 0.5s ease-in-out;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.email-thank__title,
+.email-thank__message {
+	opacity: 0;
+}
+
+.email-thank__title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-bottom: 1.5rem;
+	transition: opacity 0.3s ease-in-out 0.4s;
+}
+
+.email-thank__message {
+	font-size: 1.4rem;
+	transition: opacity 0.3s ease-in-out 0.8s;
+}
+
+.email-thank__message--emphasis {
+	font-weight: 700;
+	text-align: center;
+	display: block;
+}
+
+.email-thank--success {
+	transform: translate3d(0, 0, 0);
+}
+
+.email-thank--success .email-thank__title,
+.email-thank--success .email-thank__message {
+	opacity: 1;
+}
