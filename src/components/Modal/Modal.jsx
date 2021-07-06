@@ -1,11 +1,17 @@
-import React from 'react'
+import React from 'react';
+import { useStateContext } from '../../contexts/EmailModalProvider';
 
 import './Modal.css';
 
 const Modal = () => {
+
+    const EmailModalContext = useStateContext();
+    const { openModal } = EmailModalContext;
+
+
     return (
         <>
-            <section className="email-modal email-modal--visible">
+            <section className={`email-modal ${ openModal ? 'email-modal--visible' : ''}`}>
                 <div className="email-modal__close-btn">
                     <i className="gg-close"></i>
                 </div>
