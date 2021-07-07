@@ -1,18 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useStateContext } from '../../contexts/EmailModalProvider';
+import Cookies from 'js-cookie';
 
 import './Modal.css';
 
 const Modal = () => {
 
     const EmailModalContext = useStateContext();
-    const { openModal } = EmailModalContext;
+    const { openModal, handleOpenModal, handleCloseModal, email, handleEmailInput, handleEmailValidation, removeFeedback, invalidInput } = EmailModalContext;
+    
+    
+    useEffect(() => {
 
+        document.body.addEventListener('mouseleave', () => {
+            // if (Cookies.get('modalOpenedBefore') === 'true') {
+            //     return null;
+            // }
+            handleOpenModal();
+        })
 
+        return () => {
+            document.body.removeEventListener('mouseleave', () => {
+                handleOpenModal();
+            })
+        }
+
+    }, [handleOpenModal]);
     return (
         <>
             <section className={`email-modal ${ openModal ? 'email-modal--visible' : ''}`}>
-                <div className="email-modal__close-btn">
+                <div className="email-modal__close-btn" onClick={ handleCloseModal }>
                     <i className="gg-close"></i>
                 </div>
                 <div className="email-modal__container">
@@ -30,14 +47,22 @@ const Modal = () => {
                                 notifications, discounts, and our weekly newsletter. 
                             </span>
                         </p>
-                        <div className="email-modal__error-msg">
+                        <div className={`email-modal__error-msg ${ invalidInput ? 'email-modal__error-msg--active' : ''}`}>
                             Please enter a valid email.
                         </div>
-                        <div className="email-modal__form-group">
-                            <input type="text" className="email-modal__input" placeholder="email@mail.com" />
+                        <div className={`email-modal__form-group ${ invalidInput ? 'email-modal__form-group--error' : ''}`}>
+                            <input 
+                                type="text" 
+                                className="email-modal__input" 
+                                placeholder="email@mail.com" 
+                                onChange={ handleEmailInput }
+                                onBlur={ handleEmailValidation }
+                                onFocus={ removeFeedback }
+                                value={ email }
+                            />
                             <button className="email-modal__button">Send</button>
                         </div>
-                        <div className="email-modal__decline-offer">Sorry, I'm not interested</div>
+                        <div className="email-modal__decline-offer" onClick={ handleCloseModal }>Sorry, I'm not interested</div>
                     </div>
                     <div className="email-modal__side-image">
                         <img src="img/fruits.jpg" alt="fruits" />
