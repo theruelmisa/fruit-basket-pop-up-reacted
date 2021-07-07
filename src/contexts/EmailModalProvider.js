@@ -51,6 +51,11 @@ export const EmailModalProvider = ({ children }) => {
 		e.preventDefault();
 		if (!invalidInput && email.length > 1) {
 			setFormSubmitted(true);
+
+			// Added modal auto close after thank you message shows
+			setTimeout(() => {
+				setOpenModal(false);
+			}, 3000);
 		}
 	};
 
