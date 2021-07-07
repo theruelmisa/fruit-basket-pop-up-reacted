@@ -27,7 +27,7 @@ export const EmailModalProvider = ({ children }) => {
 		const emailIsValid = (email) => {
 			return /\S+@\S+\.\S+/.test(email);
 		};
-
+		console.log(emailIsValid);
 		setInvalidInput(emailIsValid);
 	};
 
