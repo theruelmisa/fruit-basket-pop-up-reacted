@@ -7,15 +7,26 @@ import './Modal.css';
 const Modal = () => {
 
     const EmailModalContext = useStateContext();
-    const { openModal, handleOpenModal, handleCloseModal, email, handleEmailInput, handleEmailValidation, removeFeedback, invalidInput } = EmailModalContext;
+    const { 
+        openModal, 
+        handleOpenModal, 
+        handleCloseModal, 
+        email, 
+        handleEmailInput, 
+        handleEmailValidation, 
+        removeFeedback, 
+        invalidInput,
+        formSubmitted,
+        formSubmitHandler
+    } = EmailModalContext;
     
     
     useEffect(() => {
 
         document.body.addEventListener('mouseleave', () => {
-            // if (Cookies.get('modalOpenedBefore') === 'true') {
-            //     return null;
-            // }
+            if (Cookies.get('modalOpenedBefore') === 'true') {
+                return null;
+            }
             handleOpenModal();
         })
 
@@ -60,14 +71,14 @@ const Modal = () => {
                                 onFocus={ removeFeedback }
                                 value={ email }
                             />
-                            <button className="email-modal__button">Send</button>
+                            <button className="email-modal__button" onClick={ formSubmitHandler }>Send</button>
                         </div>
                         <div className="email-modal__decline-offer" onClick={ handleCloseModal }>Sorry, I'm not interested</div>
                     </div>
                     <div className="email-modal__side-image">
                         <img src="img/fruits.jpg" alt="fruits" />
                     </div>
-                    <div className="email-thank">
+                    <div className={`email-thank ${ formSubmitted ? 'email-thank--success' : ''}`}>
                         <div className="email-thank__title">
                             Thank you <span className="email-thank__user"></span>
                         </div>

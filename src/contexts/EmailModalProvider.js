@@ -9,30 +9,49 @@ export const EmailModalProvider = ({ children }) => {
 	const [openModal, setOpenModal] = useState(false);
 	const [email, setEmail] = useState("");
 	const [invalidInput, setInvalidInput] = useState(false);
+	const [formSubmitted, setFormSubmitted] = useState(false);
 
+	// Modal state handlers
 	const handleOpenModal = () => {
 		Cookies.set("modalOpenedBefore", true, { expires: 7 });
 		setOpenModal(true);
 	};
 
 	const handleCloseModal = () => {
+		setEmail("");
+		setInvalidInput(false);
 		setOpenModal(false);
 	};
 
+	// Email State Handlers
 	const handleEmailInput = (e) => {
 		setEmail(e.target.value);
 	};
 
+	// Input Validation State Handlers
 	const handleEmailValidation = (e) => {
-		const emailIsValid = (email) => {
-			return /\S+@\S+\.\S+/.test(email);
+		const emailIsValid = (text) => {
+			return /\S+@\S+\.\S+/.test(text);
 		};
-		console.log(emailIsValid);
-		setInvalidInput(emailIsValid);
+
+		if (!emailIsValid(email)) {
+			setInvalidInput(true);
+			return null;
+		}
+
+		setInvalidInput(false);
 	};
 
 	const removeFeedback = (e) => {
 		setInvalidInput(false);
+	};
+
+	// Form Completion State Handlers
+	const formSubmitHandler = (e) => {
+		e.preventDefault();
+		if (!invalidInput && email.length > 1) {
+			setFormSubmitted(true);
+		}
 	};
 
 	return (
@@ -46,6 +65,8 @@ export const EmailModalProvider = ({ children }) => {
 				handleEmailValidation,
 				removeFeedback,
 				invalidInput,
+				formSubmitted,
+				formSubmitHandler,
 			}}
 		>
 			{children}
